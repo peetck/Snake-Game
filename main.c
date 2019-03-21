@@ -50,6 +50,7 @@ int main(int argc, char* args[]){
     int food_y = 0;
     char going = 'R';
     int food_status = 1;
+    int keyboard_bug_fix = 1;
     // โปรแกรมรัน
     while (running){
         // เช็ค event
@@ -59,26 +60,38 @@ int main(int argc, char* args[]){
                 running = 0;
             }
             else if (event.type == SDL_KEYDOWN){
-                if (event.key.keysym.sym == SDLK_RIGHT && going != 'L'){
+                if (event.key.keysym.sym == SDLK_RIGHT && going != 'L' && keyboard_bug_fix){
                     going = 'R';
+                    keyboard_bug_fix = 0;
                 }
-                else if (event.key.keysym.sym == SDLK_LEFT && going != 'R'){
+                else if (event.key.keysym.sym == SDLK_LEFT && going != 'R' && keyboard_bug_fix){
                     going = 'L';
+                    keyboard_bug_fix = 0;
                 }
-                else if (event.key.keysym.sym == SDLK_UP && going != 'D'){
+                else if (event.key.keysym.sym == SDLK_UP && going != 'D' && keyboard_bug_fix){
                     going = 'U';
+                    keyboard_bug_fix = 0;
                 }
-                else if (event.key.keysym.sym == SDLK_DOWN && going != 'U'){
+                else if (event.key.keysym.sym == SDLK_DOWN && going != 'U' && keyboard_bug_fix){
                     going = 'D';
+                    keyboard_bug_fix = 0;
                 }
             }
         }
         SDL_RenderCopy(renderer, bg_texture, NULL, &bg);
-        if (food_status){
+        while (food_status){
             food_texture = SDL_CreateTextureFromSurface(renderer, food_surface);
-            food_x = 20 * (rand() % 10);
-            food_y = 20 * (rand() % 10);
+            food_x = 20 * (rand() % 35);
+            food_y = 20 * (rand() % 35);
+            if (food_x == 0) food_x = 20;
+            if (food_y == 0) food_y = 20;
             food_status = 0;
+            for (int i = 0; i < size; i++){
+                if (food_x == x[i] && food_y == y[i]){
+                    food_status++;
+                    break;
+                }
+            }
         }
         SDL_Rect food = {food_x, food_y, 20, 20};
         SDL_RenderCopy(renderer, food_texture, NULL, &food);
@@ -117,8 +130,12 @@ int main(int argc, char* args[]){
             SDL_DestroyTexture(food_texture);
         }
         for (int i = 1; i < size; i++){
-                x[i] = temp_x[i - 1];
-                y[i] = temp_y[i - 1];
+            if (x[0] == x[i] && y[0] == y[i]){
+                running = 0;
+                break;
+            }
+            x[i] = temp_x[i - 1];
+            y[i] = temp_y[i - 1];
         }
         for (int i = 0; i < size; i++){
             temp_x[i] = x[i];
@@ -126,10 +143,11 @@ int main(int argc, char* args[]){
         }
         SDL_RenderPresent(renderer);
         // ตั้งค่า delay time;
-        int delay= 5000 / 60 - SDL_GetTicks() + SDL_GetTicks();
+        int delay= 3000 / 60 - SDL_GetTicks() + SDL_GetTicks();
         if(delay > 0){
             SDL_Delay(delay);
         }
+        keyboard_bug_fix = 1;
     }
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
