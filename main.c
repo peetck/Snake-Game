@@ -177,6 +177,7 @@ int main(int argc, char* args[]){
                 x[size] = x[size - 1] - 20;
                 size++;
                 food_status++;
+                score += 100;
                 SDL_DestroyTexture(food_texture);
             }
             for (int i = 1; i < size; i++){
