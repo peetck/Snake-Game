@@ -5,6 +5,7 @@
 #include <SDL_mixer.h>
 #include <stdlib.h>
 #include <SDL_ttf.h>
+#include <ctype.h>
 const int width = 1100; // ความกว้าง
 const int height = 800; // ความสูง
 /*********************************************************/
@@ -52,6 +53,7 @@ int main(int argc, char* args[]){
     SDL_Surface* food_surface = NULL;
     SDL_Texture* food_texture = NULL;
     food_surface = IMG_Load("plus.png");
+    //
     // ตั้งพิกัด
     x[0] = 400;
     y[0] = 400;
@@ -62,9 +64,9 @@ int main(int argc, char* args[]){
     //
     TTF_Font* sans = TTF_OpenFont("OpenSans-Regular.ttf", 30);
     SDL_Color black = {0, 0, 0};
-    SDL_Surface* surfacemessage = TTF_RenderText_Solid(sans, "Score: xxxxxx", black);
+    SDL_Surface* surfacemessage = TTF_RenderText_Solid(sans, "xxxxxx", black);
     SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfacemessage);
-    SDL_Rect message_rect = {820, 650, 250, 100};
+    SDL_Rect message_rect = {810, 650, 260, 100};
     //
     SDL_Surface* menu_message_surface = TTF_RenderText_Solid(sans, "Snake Game with C language", black);
     SDL_Texture* menu_message = SDL_CreateTextureFromSurface(renderer, menu_message_surface);
@@ -123,9 +125,8 @@ int main(int argc, char* args[]){
             SDL_RenderPresent(renderer);
         }
         else if (menu_check == 2){
-            char mes[10000] = "Score: ";
             sprintf(score_str, "%06d", score);
-            SDL_Surface* surfacemessage = TTF_RenderText_Solid(sans, strcat(mes, score_str), black);
+            SDL_Surface* surfacemessage = TTF_RenderText_Solid(sans, score_str, black);
             SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfacemessage);
             SDL_RenderClear(renderer);
             SDL_RenderCopy(renderer, bg_texture, NULL, &bg);
