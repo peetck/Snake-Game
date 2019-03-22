@@ -60,6 +60,14 @@ int main(int argc, char* args[]){
     SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfacemessage);
     SDL_Rect message_rect = {820, 650, 250, 100};
     //
+    SDL_Surface* menu_message_surface = TTF_RenderText_Solid(sans, "Snake Game with C language", black);
+    SDL_Texture* menu_message = SDL_CreateTextureFromSurface(renderer, menu_message_surface);
+    SDL_Rect menu_message_rect = {350, 50, 700, 100};
+    //
+    SDL_Surface* menu_message2_surface = TTF_RenderText_Solid(sans, "Press ENTER to start", black);
+    SDL_Texture* menu_message2 = SDL_CreateTextureFromSurface(renderer, menu_message2_surface);
+    SDL_Rect menu_message2_rect = {300, 600, 600, 100};
+    //
     int food_x = 0;
     int food_y = 0;
     char going = 'R';
@@ -101,6 +109,8 @@ int main(int argc, char* args[]){
         if (menu_check == 1){
             SDL_RenderClear(renderer);
             SDL_RenderCopy(renderer, menu_texture, NULL, &menu);
+            SDL_RenderCopy(renderer, menu_message, NULL, &menu_message_rect);
+            SDL_RenderCopy(renderer, menu_message2, NULL, &menu_message2_rect);
             SDL_RenderPresent(renderer);
         }
         else if (menu_check == 2){
