@@ -42,7 +42,13 @@ int main(int argc, char* args[]){
     SDL_Texture* snake_texture = NULL;
     snake_surface = IMG_Load("snake.png");
     snake_texture = SDL_CreateTextureFromSurface(renderer, snake_surface);
-
+    //
+    SDL_Surface* game_over_surface = NULL;
+    SDL_Texture* game_over_texture = NULL;
+    game_over_surface = IMG_Load("game_over.jpg");
+    game_over_texture = SDL_CreateTextureFromSurface(renderer, game_over_surface);
+    SDL_Rect game_over = {0, 0, 1100, 800};
+    //
     SDL_Surface* food_surface = NULL;
     SDL_Texture* food_texture = NULL;
     food_surface = IMG_Load("plus.png");
@@ -102,7 +108,10 @@ int main(int argc, char* args[]){
                     keyboard_bug_fix = 0;
                 }
                 else if (menu_check == 1 && event.key.keysym.sym == SDLK_RETURN){
-                    menu_check++;
+                    menu_check = 2;
+                }
+                else if (menu_check == 3 && event.key.keysym.sym == SDLK_RETURN){
+                    running = 0;
                 }
             }
         }
@@ -172,7 +181,7 @@ int main(int argc, char* args[]){
             }
             for (int i = 1; i < size; i++){
                 if (x[0] == x[i] && y[0] == y[i]){
-                    running = 0;
+                    menu_check = 3;
                     break;
                 }
                 x[i] = temp_x[i - 1];
@@ -191,6 +200,11 @@ int main(int argc, char* args[]){
                 SDL_Delay(delay);
             }
             keyboard_bug_fix = 1;
+        }
+        else if (menu_check == 3){
+            SDL_RenderClear(renderer);
+            SDL_RenderCopy(renderer, game_over_texture, NULL, &game_over);
+            SDL_RenderPresent(renderer);
         }
     }
     SDL_DestroyRenderer(renderer);
