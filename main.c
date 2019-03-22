@@ -4,6 +4,7 @@
 #include <string.h>
 #include <SDL_mixer.h>
 #include <stdlib.h>
+#include <SDL_ttf.h>
 const int width = 1100; // ความกว้าง
 const int height = 800; // ความสูง
 /*********************************************************/
@@ -14,6 +15,7 @@ int size = 3;
 /*********************************************************/
 int main(int argc, char* args[]){
      // init sdl
+    TTF_Init();
     SDL_Init(SDL_INIT_EVERYTHING);
     // สร้างหน้าต่างโปรแกรม
     SDL_Window* window = SDL_CreateWindow("Snake Game @@", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
@@ -28,7 +30,7 @@ int main(int argc, char* args[]){
     SDL_Texture* bg_texture = NULL;
     bg_surface = IMG_Load("bg.png");
     bg_texture = SDL_CreateTextureFromSurface(renderer, bg_surface);
-    SDL_Rect bg = {0, 0, 800, 800};
+    SDL_Rect bg = {0, 0, 1200, 800};
     // โหลดตัวงู
     SDL_Surface* snake_surface = NULL;
     SDL_Texture* snake_texture = NULL;
@@ -45,12 +47,20 @@ int main(int argc, char* args[]){
     y[1] = 400;
     x[2] = 360;
     y[2] = 400;
-
+    //
+    TTF_Font* sans = TTF_OpenFont("OpenSans-Regular.ttf", 30);
+    SDL_Color black = {0, 0, 0};
+    SDL_Surface* surfacemessage = TTF_RenderText_Solid(sans, "Score: xxxxxx", black);
+    SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfacemessage);
+    SDL_Rect message_rect = {820, 650, 250, 100};
+    //
     int food_x = 0;
     int food_y = 0;
     char going = 'R';
     int food_status = 1;
     int keyboard_bug_fix = 1;
+    int score = 0;
+    char score_str[10000];
     // โปรแกรมรัน
     while (running){
         // เช็ค event
@@ -78,6 +88,11 @@ int main(int argc, char* args[]){
                 }
             }
         }
+        char mes[10000] = "Score: ";
+        sprintf(score_str, "%06d", score);
+        SDL_Surface* surfacemessage = TTF_RenderText_Solid(sans, strcat(mes, score_str), black);
+        SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfacemessage);
+        SDL_RenderClear(renderer);
         SDL_RenderCopy(renderer, bg_texture, NULL, &bg);
         while (food_status){
             food_texture = SDL_CreateTextureFromSurface(renderer, food_surface);
@@ -141,6 +156,8 @@ int main(int argc, char* args[]){
             temp_x[i] = x[i];
             temp_y[i] = y[i];
         }
+        SDL_RenderCopy(renderer, message, NULL, &message_rect);
+        score++;
         SDL_RenderPresent(renderer);
         // ตั้งค่า delay time;
         int delay= 3000 / 60 - SDL_GetTicks() + SDL_GetTicks();
