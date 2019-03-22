@@ -193,7 +193,6 @@ int main(int argc, char* args[]){
                 temp_y[i] = y[i];
             }
             SDL_RenderCopy(renderer, message, NULL, &message_rect);
-            score++;
             SDL_RenderPresent(renderer);
             // ตั้งค่า delay time;
             int delay= 3000 / 60 - SDL_GetTicks() + SDL_GetTicks();
