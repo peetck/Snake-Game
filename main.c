@@ -44,6 +44,11 @@ int main(int argc, char* args[]){
     snake_surface = IMG_Load("snake.png");
     snake_texture = SDL_CreateTextureFromSurface(renderer, snake_surface);
     //
+    SDL_Surface* snake2_surface = NULL;
+    SDL_Texture* snake2_texture = NULL;
+    snake2_surface = IMG_Load("snake2.png");
+    snake2_texture = SDL_CreateTextureFromSurface(renderer, snake2_surface);
+    //
     SDL_Surface* game_over_surface = NULL;
     SDL_Texture* game_over_texture = NULL;
     game_over_surface = IMG_Load("game_over.jpg");
@@ -70,11 +75,11 @@ int main(int argc, char* args[]){
     //
     SDL_Surface* menu_message_surface = TTF_RenderText_Solid(sans, "Snake Game with C language", black);
     SDL_Texture* menu_message = SDL_CreateTextureFromSurface(renderer, menu_message_surface);
-    SDL_Rect menu_message_rect = {350, 50, 700, 100};
+    SDL_Rect menu_message_rect = {210, 50, 700, 100};
     //
     SDL_Surface* menu_message2_surface = TTF_RenderText_Solid(sans, "Press ENTER to start", black);
     SDL_Texture* menu_message2 = SDL_CreateTextureFromSurface(renderer, menu_message2_surface);
-    SDL_Rect menu_message2_rect = {300, 600, 600, 100};
+    SDL_Rect menu_message2_rect = {250, 600, 600, 100};
     //
     int food_x = 0;
     int food_y = 0;
@@ -148,7 +153,8 @@ int main(int argc, char* args[]){
             SDL_RenderCopy(renderer, food_texture, NULL, &food);
             for (int i = 0; i < size; i++){
                 SDL_Rect snake = {x[i], y[i], 20, 20};
-                SDL_RenderCopy(renderer, snake_texture, NULL, &snake);
+                if (i != 0) SDL_RenderCopy(renderer, snake2_texture, NULL, &snake);
+                else SDL_RenderCopy(renderer, snake_texture, NULL, &snake);
             }
             if (going == 'R'){
                 x[0] += 20;
