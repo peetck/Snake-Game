@@ -71,7 +71,7 @@ int main(int argc, char* args[]){
     SDL_Color black = {0, 0, 0};
     SDL_Surface* surfacemessage = TTF_RenderText_Solid(sans, "xxxxxx", black);
     SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfacemessage);
-    SDL_Rect message_rect = {810, 650, 260, 100};
+    SDL_Rect message_rect = {810, 665, 260, 100};
     //
     SDL_Surface* menu_message_surface = TTF_RenderText_Solid(sans, "Snake Game with C language", black);
     SDL_Texture* menu_message = SDL_CreateTextureFromSurface(renderer, menu_message_surface);
@@ -80,6 +80,10 @@ int main(int argc, char* args[]){
     SDL_Surface* menu_message2_surface = TTF_RenderText_Solid(sans, "Press ENTER to start", black);
     SDL_Texture* menu_message2 = SDL_CreateTextureFromSurface(renderer, menu_message2_surface);
     SDL_Rect menu_message2_rect = {250, 600, 600, 100};
+    //
+    SDL_Surface* ingamemessage_surface = TTF_RenderText_Solid(sans, "Instructions", black);
+    SDL_Texture* ingamemessage = SDL_CreateTextureFromSurface(renderer, ingamemessage_surface);
+    SDL_Rect ingamemessage_rect = {810, 20, 250, 100};
     //
     int food_x = 0;
     int food_y = 0;
@@ -200,6 +204,7 @@ int main(int argc, char* args[]){
                 temp_y[i] = y[i];
             }
             SDL_RenderCopy(renderer, message, NULL, &message_rect);
+            SDL_RenderCopy(renderer, ingamemessage, NULL, &ingamemessage_rect);
             SDL_RenderPresent(renderer);
             // ตั้งค่า delay time;
             int delay= 3000 / 60 - SDL_GetTicks() + SDL_GetTicks();
