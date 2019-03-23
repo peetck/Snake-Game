@@ -38,6 +38,12 @@ int main(int argc, char* args[]){
     menu_surface = IMG_Load("menu.png");
     menu_texture = SDL_CreateTextureFromSurface(renderer, menu_surface);
     SDL_Rect menu = {0, 0, 1200, 800};
+
+    SDL_Surface* game_option_surface = NULL;
+    SDL_Texture* game_option_texture = NULL;
+    game_option_surface = IMG_Load("game_option.png");
+    game_option_texture = SDL_CreateTextureFromSurface(renderer, game_option_surface);
+    SDL_Rect game_option = {0, 0, 1200, 800};
     // โหลดตัวงู
     SDL_Surface* snake_surface = NULL;
     SDL_Texture* snake_texture = NULL;
@@ -67,7 +73,7 @@ int main(int argc, char* args[]){
     x[2] = 360;
     y[2] = 400;
     //
-    TTF_Font* sans = TTF_OpenFont("OpenSans-Regular.ttf", 30);
+    TTF_Font* sans = TTF_OpenFont("OpenSans-Regular.ttf", 100);
     SDL_Color black = {0, 0, 0};
     SDL_Surface* surfacemessage = TTF_RenderText_Solid(sans, "xxxxxx", black);
     SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfacemessage);
@@ -81,10 +87,26 @@ int main(int argc, char* args[]){
     SDL_Texture* menu_message2 = SDL_CreateTextureFromSurface(renderer, menu_message2_surface);
     SDL_Rect menu_message2_rect = {250, 600, 600, 100};
     //
-    SDL_Surface* ingamemessage_surface = TTF_RenderText_Solid(sans, "Instructions", black);
-    SDL_Texture* ingamemessage = SDL_CreateTextureFromSurface(renderer, ingamemessage_surface);
-    SDL_Rect ingamemessage_rect = {810, 20, 250, 100};
+    SDL_Surface* gameoption_message_surface = TTF_RenderText_Solid(sans, "Game option", black);
+    SDL_Texture* gameoption_message = SDL_CreateTextureFromSurface(renderer, gameoption_message_surface);
+    SDL_Rect gameoption_message_rect = {300, 50, 500, 100};
     //
+    SDL_Surface* diff_message_surface = TTF_RenderText_Solid(sans, "Easy", black);
+    SDL_Texture* diff_message = SDL_CreateTextureFromSurface(renderer, diff_message_surface);
+    SDL_Rect diff_message_rect = {450, 200, 150, 100};
+    //
+    SDL_Surface* diff2_message_surface = TTF_RenderText_Solid(sans, "Medium", black);
+    SDL_Texture* diff2_message = SDL_CreateTextureFromSurface(renderer, diff2_message_surface);
+    SDL_Rect diff2_message_rect = {450, 400, 250, 100};
+    //
+    SDL_Surface* diff3_message_surface = TTF_RenderText_Solid(sans, "Hard", black);
+    SDL_Texture* diff3_message = SDL_CreateTextureFromSurface(renderer, diff3_message_surface);
+    SDL_Rect diff3_message_rect = {450, 600, 150, 100};
+    //
+    SDL_Surface* select_message_surface = TTF_RenderText_Solid(sans, ">", black);
+    SDL_Texture* select_message = SDL_CreateTextureFromSurface(renderer, select_message_surface);
+    //
+    int select_diff = 1;
     int food_x = 0;
     int food_y = 0;
     char going = 'R';
@@ -93,6 +115,7 @@ int main(int argc, char* args[]){
     int score = 0;
     char score_str[10000];
     int menu_check = 1;
+    int diff_t = 200;
     // โปรแกรมรัน
     while (running){
         // เช็ค event
@@ -102,26 +125,35 @@ int main(int argc, char* args[]){
                 running = 0;
             }
             else if (event.type == SDL_KEYDOWN){
-                if (event.key.keysym.sym == SDLK_RIGHT && going != 'L' && keyboard_bug_fix && menu_check == 2){
+                if (event.key.keysym.sym == SDLK_RIGHT && going != 'L' && keyboard_bug_fix && menu_check == 3){
                     going = 'R';
                     keyboard_bug_fix = 0;
                 }
-                else if (event.key.keysym.sym == SDLK_LEFT && going != 'R' && keyboard_bug_fix && menu_check == 2){
+                else if (event.key.keysym.sym == SDLK_LEFT && going != 'R' && keyboard_bug_fix && menu_check == 3){
                     going = 'L';
                     keyboard_bug_fix = 0;
                 }
-                else if (event.key.keysym.sym == SDLK_UP && going != 'D' && keyboard_bug_fix && menu_check == 2){
+                else if (event.key.keysym.sym == SDLK_UP && going != 'D' && keyboard_bug_fix && menu_check == 3){
                     going = 'U';
                     keyboard_bug_fix = 0;
                 }
-                else if (event.key.keysym.sym == SDLK_DOWN && going != 'U' && keyboard_bug_fix && menu_check == 2){
+                else if (event.key.keysym.sym == SDLK_DOWN && going != 'U' && keyboard_bug_fix && menu_check == 3){
                     going = 'D';
                     keyboard_bug_fix = 0;
                 }
                 else if (menu_check == 1 && event.key.keysym.sym == SDLK_RETURN){
                     menu_check = 2;
                 }
-                else if (menu_check == 3 && event.key.keysym.sym == SDLK_RETURN){
+                else if (menu_check == 2 && event.key.keysym.sym == SDLK_UP){
+                    select_diff --;
+                }
+                else if (menu_check == 2 && event.key.keysym.sym == SDLK_DOWN){
+                    select_diff ++;
+                }
+                else if (menu_check == 2 && event.key.keysym.sym == SDLK_RETURN){
+                    menu_check++;
+                }
+                else if (menu_check == 4 && event.key.keysym.sym == SDLK_RETURN){
                     running = 0;
                 }
             }
@@ -134,6 +166,33 @@ int main(int argc, char* args[]){
             SDL_RenderPresent(renderer);
         }
         else if (menu_check == 2){
+            SDL_RenderClear(renderer);
+            SDL_RenderCopy(renderer, game_option_texture, NULL, &game_option);
+            SDL_RenderCopy(renderer, gameoption_message, NULL, &gameoption_message_rect);
+            SDL_RenderCopy(renderer, diff_message, NULL, &diff_message_rect);
+            SDL_RenderCopy(renderer, diff2_message, NULL, &diff2_message_rect);
+            SDL_RenderCopy(renderer, diff3_message, NULL, &diff3_message_rect);
+            if (select_diff < 1){
+                select_diff = 3;
+            }
+            if (select_diff > 3){
+                select_diff = 1;
+            }
+
+            if (select_diff == 1){
+                diff_t = 200;
+            }
+            else if (select_diff == 2){
+                diff_t = 400;
+            }
+            else if (select_diff == 3){
+                diff_t = 600;
+            }
+            SDL_Rect select_message_rect = {350, diff_t, 50, 100};
+            SDL_RenderCopy(renderer, select_message, NULL, &select_message_rect);
+            SDL_RenderPresent(renderer);
+        }
+        else if (menu_check == 3){
             sprintf(score_str, "%06d", score);
             SDL_Surface* surfacemessage = TTF_RenderText_Solid(sans, score_str, black);
             SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfacemessage);
@@ -193,7 +252,7 @@ int main(int argc, char* args[]){
             }
             for (int i = 1; i < size; i++){
                 if (x[0] == x[i] && y[0] == y[i]){
-                    menu_check = 3;
+                    menu_check = 4;
                     break;
                 }
                 x[i] = temp_x[i - 1];
@@ -204,16 +263,25 @@ int main(int argc, char* args[]){
                 temp_y[i] = y[i];
             }
             SDL_RenderCopy(renderer, message, NULL, &message_rect);
-            SDL_RenderCopy(renderer, ingamemessage, NULL, &ingamemessage_rect);
             SDL_RenderPresent(renderer);
             // ตั้งค่า delay time;
-            int delay= 3000 / 60 - SDL_GetTicks() + SDL_GetTicks();
+            int delay_diff;
+            if (diff_t == 200){
+                delay_diff = 5000;
+            }
+            else if (diff_t == 400){
+                delay_diff = 4000;
+            }
+            else{
+                delay_diff = 3000;
+            }
+            int delay= delay_diff / 60 - SDL_GetTicks() + SDL_GetTicks();
             if(delay > 0){
                 SDL_Delay(delay);
             }
             keyboard_bug_fix = 1;
         }
-        else if (menu_check == 3){
+        else if (menu_check == 4){
             SDL_RenderClear(renderer);
             SDL_RenderCopy(renderer, game_over_texture, NULL, &game_over);
             SDL_RenderPresent(renderer);
