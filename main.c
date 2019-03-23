@@ -267,13 +267,13 @@ int main(int argc, char* args[]){
             // ตั้งค่า delay time;
             int delay_diff;
             if (diff_t == 200){
-                delay_diff = 5000;
-            }
-            else if (diff_t == 400){
                 delay_diff = 4000;
             }
-            else{
+            else if (diff_t == 400){
                 delay_diff = 3000;
+            }
+            else{
+                delay_diff = 2000;
             }
             int delay= delay_diff / 60 - SDL_GetTicks() + SDL_GetTicks();
             if(delay > 0){
