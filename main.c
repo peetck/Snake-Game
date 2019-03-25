@@ -33,6 +33,12 @@ int main(int argc, char* args[]){
     bg_texture = SDL_CreateTextureFromSurface(renderer, bg_surface);
     SDL_Rect bg = {0, 0, 1200, 800};
 
+    SDL_Surface* forest_surface = NULL;
+    SDL_Texture* forest_texture = NULL;
+    forest_surface = IMG_Load("forest.jpg");
+    forest_texture = SDL_CreateTextureFromSurface(renderer, forest_surface);
+    SDL_Rect forest = {20, 20, 760, 760};
+
     SDL_Surface* menu_surface = NULL;
     SDL_Texture* menu_texture = NULL;
     menu_surface = IMG_Load("menu.png");
@@ -198,6 +204,7 @@ int main(int argc, char* args[]){
             SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfacemessage);
             SDL_RenderClear(renderer);
             SDL_RenderCopy(renderer, bg_texture, NULL, &bg);
+            SDL_RenderCopy(renderer, forest_texture, NULL, &forest);
             while (food_status){
                 food_texture = SDL_CreateTextureFromSurface(renderer, food_surface);
                 food_x = 20 * (rand() % 35);
