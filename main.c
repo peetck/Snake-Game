@@ -18,6 +18,7 @@ int main(int argc, char* args[]){
      // init sdl
     TTF_Init();
     SDL_Init(SDL_INIT_EVERYTHING);
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
     // สร้างหน้าต่างโปรแกรม
     SDL_Window* window = SDL_CreateWindow("Snake Game @@", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
     // สร้าง ตัวแปร renderer
@@ -71,6 +72,8 @@ int main(int argc, char* args[]){
     SDL_Texture* food_texture = NULL;
     food_surface = IMG_Load("plus.png");
     //
+    Mix_Music *music = NULL;
+    music = Mix_LoadMUS("bg_music.mp3");
     // ตั้งพิกัด
     x[0] = 400;
     y[0] = 400;
@@ -123,6 +126,7 @@ int main(int argc, char* args[]){
     int menu_check = 1;
     int diff_t = 200;
     // โปรแกรมรัน
+    Mix_PlayMusic( music, -1 );
     while (running){
         // เช็ค event
         while (SDL_PollEvent(&event)) {
@@ -296,5 +300,7 @@ int main(int argc, char* args[]){
     }
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    Mix_FreeMusic(music);
+    Mix_CloseAudio();
     SDL_Quit();
 }
