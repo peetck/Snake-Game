@@ -74,8 +74,6 @@ int main(int argc, char* args[]){
     //
     Mix_Music *music = NULL;
     music = Mix_LoadMUS("bg_music.mp3");
-    Mix_Chunk *eat = NULL;
-    eat = Mix_LoadWAV("eat.wav");
     // ตั้งพิกัด
     x[0] = 400;
     y[0] = 400;
@@ -257,7 +255,6 @@ int main(int argc, char* args[]){
                 y[0] = 760;
             }
             if (x[0] == food_x && y[0] == food_y){
-                Mix_PlayChannel( -1, eat, 0 );
                 x[size] = x[size - 1] - 20;
                 size++;
                 food_status++;
