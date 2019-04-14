@@ -68,6 +68,12 @@ int main(int argc, char* args[]){
     game_over_texture = SDL_CreateTextureFromSurface(renderer, game_over_surface);
     SDL_Rect game_over = {0, 0, 1100, 800};
     //
+    SDL_Surface* ingame_right_surface = NULL;
+    SDL_Texture* ingame_right_texture = NULL;
+    ingame_right_surface = IMG_Load("right_img.png");
+    ingame_right_texture = SDL_CreateTextureFromSurface(renderer, ingame_right_surface);
+    SDL_Rect ingame_right = {800, 20, 280, 620};
+    //
     SDL_Surface* food_surface = NULL;
     SDL_Texture* food_texture = NULL;
     food_surface = IMG_Load("plus.png");
@@ -211,6 +217,7 @@ int main(int argc, char* args[]){
             SDL_RenderClear(renderer);
             SDL_RenderCopy(renderer, bg_texture, NULL, &bg);
             SDL_RenderCopy(renderer, forest_texture, NULL, &forest);
+            SDL_RenderCopy(renderer, ingame_right_texture, NULL, &ingame_right);
             while (food_status){
                 food_texture = SDL_CreateTextureFromSurface(renderer, food_surface);
                 food_x = 20 * (rand() % 35);
