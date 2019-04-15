@@ -21,7 +21,7 @@ int main(int argc, char* args[]){
     SDL_Event event;
     // สร้างตัวเช็คว่าโปรแกรมรันอยู่หรือเปล่า
     int running = 1;
-    // โหลดภาพพื้นหลัง
+    // โหลดกรอบ
     SDL_Surface* bg_surface = NULL;
     SDL_Texture* bg_texture = NULL;
     bg_surface = IMG_Load("bg.png");
@@ -33,6 +33,18 @@ int main(int argc, char* args[]){
     forest_surface = IMG_Load("forest.jpg");
     forest_texture = SDL_CreateTextureFromSurface(renderer, forest_surface);
     SDL_Rect forest = {20, 20, 760, 760};
+    // โหลดภาพ title ใน start menu
+    SDL_Surface* menu_title_surface = NULL;
+    SDL_Texture* menu_title_texture = NULL;
+    menu_title_surface = IMG_Load("menu_title.png");
+    menu_title_texture = SDL_CreateTextureFromSurface(renderer, menu_title_surface);
+    SDL_Rect menu_title = {300, 60, 520, 138};
+    // โหลดภาพ "Press ENTER to start" ใน start menu
+    SDL_Surface* press_title_surface = NULL;
+    SDL_Texture* press_title_texture = NULL;
+    press_title_surface = IMG_Load("press_title.png");
+    press_title_texture = SDL_CreateTextureFromSurface(renderer, press_title_surface);
+    SDL_Rect press_title = {320, 660, 443, 53};
     // โหลดภาพเมนู
     SDL_Surface* menu_surface = NULL;
     SDL_Texture* menu_texture = NULL;
@@ -76,18 +88,12 @@ int main(int argc, char* args[]){
     // ตั้งตัวแปร สี
     SDL_Color black = {0, 0, 0};
     SDL_Color white = {255, 255, 255};
+    SDL_Color blue = {0, 0, 255};
+    SDL_Color blue1 = {6, 158, 255};
     // กําหนดข้อความ xxxxxx
     SDL_Surface* surfacemessage = TTF_RenderText_Solid(sans, "xxxxxx", black);
     SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfacemessage);
     SDL_Rect message_rect = {810, 665, 260, 100};
-    // กําหนดข้อความ Snake Game with C language
-    SDL_Surface* menu_message_surface = TTF_RenderText_Solid(sans, "Snake Game with C language", white);
-    SDL_Texture* menu_message = SDL_CreateTextureFromSurface(renderer, menu_message_surface);
-    SDL_Rect menu_message_rect = {210, 50, 700, 100};
-    // กําหนดข้อความ Press ENTER to start
-    SDL_Surface* menu_message2_surface = TTF_RenderText_Solid(sans, "Press ENTER to start", white);
-    SDL_Texture* menu_message2 = SDL_CreateTextureFromSurface(renderer, menu_message2_surface);
-    SDL_Rect menu_message2_rect = {250, 600, 600, 100};
     // กําหนดข้อความ Game option
     SDL_Surface* gameoption_message_surface = TTF_RenderText_Solid(sans, "Game option", black);
     SDL_Texture* gameoption_message = SDL_CreateTextureFromSurface(renderer, gameoption_message_surface);
@@ -176,7 +182,7 @@ int main(int argc, char* args[]){
         }
         if (menu_check == 1){
             SDL_RenderClear(renderer);
-            SDL_Rect menu = {menu_x, 0, 1920, 1080};
+            SDL_Rect menu = {menu_x, 0, 1920, 800};
             if (menu_pos == 1){
                 menu_x += 0.01;
             }
@@ -190,8 +196,8 @@ int main(int argc, char* args[]){
                 menu_pos = 1;
             }
             SDL_RenderCopy(renderer, menu_texture, NULL, &menu);
-            SDL_RenderCopy(renderer, menu_message, NULL, &menu_message_rect);
-            SDL_RenderCopy(renderer, menu_message2, NULL, &menu_message2_rect);
+            SDL_RenderCopy(renderer, press_title_texture, NULL, &press_title);
+            SDL_RenderCopy(renderer, menu_title_texture, NULL, &menu_title);
             SDL_RenderPresent(renderer);
         }
         else if (menu_check == 2){
