@@ -38,7 +38,6 @@ int main(int argc, char* args[]){
     SDL_Texture* menu_texture = NULL;
     menu_surface = IMG_Load("menu.png");
     menu_texture = SDL_CreateTextureFromSurface(renderer, menu_surface);
-    SDL_Rect menu = {0, 0, 1200, 800};
     // โหลดภาพเมนู (เลือกระดับความยาก)
     SDL_Surface* game_option_surface = NULL;
     SDL_Texture* game_option_texture = NULL;
@@ -74,18 +73,19 @@ int main(int argc, char* args[]){
     eat = Mix_LoadWAV("eat.wav");
     // โหลด fonts
     TTF_Font* sans = TTF_OpenFont("OpenSans-Regular.ttf", 100);
-    // ตั้งตัวแปร สีดํา
+    // ตั้งตัวแปร สี
     SDL_Color black = {0, 0, 0};
+    SDL_Color white = {255, 255, 255};
     // กําหนดข้อความ xxxxxx
     SDL_Surface* surfacemessage = TTF_RenderText_Solid(sans, "xxxxxx", black);
     SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfacemessage);
     SDL_Rect message_rect = {810, 665, 260, 100};
     // กําหนดข้อความ Snake Game with C language
-    SDL_Surface* menu_message_surface = TTF_RenderText_Solid(sans, "Snake Game with C language", black);
+    SDL_Surface* menu_message_surface = TTF_RenderText_Solid(sans, "Snake Game with C language", white);
     SDL_Texture* menu_message = SDL_CreateTextureFromSurface(renderer, menu_message_surface);
     SDL_Rect menu_message_rect = {210, 50, 700, 100};
     // กําหนดข้อความ Press ENTER to start
-    SDL_Surface* menu_message2_surface = TTF_RenderText_Solid(sans, "Press ENTER to start", black);
+    SDL_Surface* menu_message2_surface = TTF_RenderText_Solid(sans, "Press ENTER to start", white);
     SDL_Texture* menu_message2 = SDL_CreateTextureFromSurface(renderer, menu_message2_surface);
     SDL_Rect menu_message2_rect = {250, 600, 600, 100};
     // กําหนดข้อความ Game option
@@ -112,12 +112,12 @@ int main(int argc, char* args[]){
     int y[1000]; // arrays ของ งู ในแกน y
     int temp_x[1000], temp_y[1000]; // array ไว้พักค่างู
     int size = 3; // ตัวแปรไว้เก็บขนาดของงู (ความยาว) เริ่มต้นที่ 3
-    x[0] = 400; // พิกัดของงูตัวที่ 0 ในแกน x
-    y[0] = 400; // พิกัดของงูตัวที่ 0 ในแกน y
-    x[1] = 380; // พิกัดของงูตัวที่ 1 ในแกน x
-    y[1] = 400; // พิกัดของงูตัวที่ 1 ในแกน y
-    x[2] = 360; // พิกัดของงูตัวที่ 2 ในแกน x
-    y[2] = 400; // พิกัดของงูตัวที่ 2 ในแกน y
+    x[0] = 400; // พิกัดของงูตําแหน่งที่ 0 ในแกน x
+    y[0] = 400; // พิกัดของงูตําแหน่งที่ 0 ในแกน y
+    x[1] = 380; // พิกัดของงูตําแหน่งที่ 1 ในแกน x
+    y[1] = 400; // พิกัดของงูตําแหน่งที่ 1 ในแกน y
+    x[2] = 360; // พิกัดของงูตําแหน่งที่ 2 ในแกน x
+    y[2] = 400; // พิกัดของงูตําแหน่งที่ 2 ในแกน y
     int select_diff = 1; // ตัวแปรเก็บค่าระดับความยาก ตั้งแต่ 1 - 3
     int food_x = 0; // ตําแหน่งของอาหาร ในแกน x
     int food_y = 0; // ตําแหน่งของอาหาร ในแกน y
@@ -128,6 +128,8 @@ int main(int argc, char* args[]){
     char score_str[10000]; // score ที่เป็น str
     int menu_check = 1; // ตัวแปรไว้บอกว่าตอนนี้อยู่หน้าเมนูอันไหน
     int diff_t = 200; // ตัวแปรไว้เก็บค่าความเร็วในแต่ละระดับความยาก
+    float menu_x = -820; // ตัวแปรไว้เก็บแกน x ของภาพเมนู
+    int menu_pos = 1; // ตัวแปรไว้เก็บว่าขณะนี้ ภาพเมนูเลื่อนจาก ขวา > ซ้าย หรือ ซ้าย > ขวา
     // เล่นเพลง (ไม่มีวันจบ)
     Mix_PlayMusic(music, -1);
     // โปรแกรมรัน
@@ -174,6 +176,19 @@ int main(int argc, char* args[]){
         }
         if (menu_check == 1){
             SDL_RenderClear(renderer);
+            SDL_Rect menu = {menu_x, 0, 1920, 1080};
+            if (menu_pos == 1){
+                menu_x += 0.01;
+            }
+            if (menu_pos == 2){
+                menu_x -= 0.01;
+            }
+            if (menu_x >= 0){
+                menu_pos = 2;
+            }
+            if (menu_x <= -820){
+                menu_pos = 1;
+            }
             SDL_RenderCopy(renderer, menu_texture, NULL, &menu);
             SDL_RenderCopy(renderer, menu_message, NULL, &menu_message_rect);
             SDL_RenderCopy(renderer, menu_message2, NULL, &menu_message2_rect);
