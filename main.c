@@ -24,65 +24,65 @@ int main(int argc, char* args[]){
     // โหลดกรอบ
     SDL_Surface* bg_surface = NULL;
     SDL_Texture* bg_texture = NULL;
-    bg_surface = IMG_Load("bg.png");
+    bg_surface = IMG_Load("image/bg.png");
     bg_texture = SDL_CreateTextureFromSurface(renderer, bg_surface);
     SDL_Rect bg = {0, 0, 1200, 800};
     // โหลดภาพพื้นหลังในเกม
     SDL_Surface* forest_surface = NULL;
     SDL_Texture* forest_texture = NULL;
-    forest_surface = IMG_Load("forest.jpg");
+    forest_surface = IMG_Load("image/forest.jpg");
     forest_texture = SDL_CreateTextureFromSurface(renderer, forest_surface);
     SDL_Rect forest = {20, 20, 760, 760};
     // โหลดภาพ title ใน start menu
     SDL_Surface* menu_title_surface = NULL;
     SDL_Texture* menu_title_texture = NULL;
-    menu_title_surface = IMG_Load("menu_title.png");
+    menu_title_surface = IMG_Load("image/menu_title.png");
     menu_title_texture = SDL_CreateTextureFromSurface(renderer, menu_title_surface);
     SDL_Rect menu_title = {300, 60, 520, 138};
     // โหลดภาพ "Press ENTER to start" ใน start menu
     SDL_Surface* press_title_surface = NULL;
     SDL_Texture* press_title_texture = NULL;
-    press_title_surface = IMG_Load("press_title.png");
+    press_title_surface = IMG_Load("image/press_title.png");
     press_title_texture = SDL_CreateTextureFromSurface(renderer, press_title_surface);
     SDL_Rect press_title = {320, 660, 443, 53};
     // โหลดภาพเมนู
     SDL_Surface* menu_surface = NULL;
     SDL_Texture* menu_texture = NULL;
-    menu_surface = IMG_Load("menu.png");
+    menu_surface = IMG_Load("image/menu.png");
     menu_texture = SDL_CreateTextureFromSurface(renderer, menu_surface);
     // โหลดภาพเมนู (เลือกระดับความยาก)
     SDL_Surface* game_option_surface = NULL;
     SDL_Texture* game_option_texture = NULL;
-    game_option_surface = IMG_Load("game_option.png");
+    game_option_surface = IMG_Load("image/game_option.png");
     game_option_texture = SDL_CreateTextureFromSurface(renderer, game_option_surface);
     SDL_Rect game_option = {0, 0, 1200, 800};
     // โหลดตัวงู
     SDL_Surface* snake_surface = NULL;
     SDL_Texture* snake_texture = NULL;
-    snake_surface = IMG_Load("snake.png");
+    snake_surface = IMG_Load("image/snake.png");
     snake_texture = SDL_CreateTextureFromSurface(renderer, snake_surface);
     // โหลดภาพตอนจบเกม
     SDL_Surface* game_over_surface = NULL;
     SDL_Texture* game_over_texture = NULL;
-    game_over_surface = IMG_Load("game_over.jpg");
+    game_over_surface = IMG_Load("image/game_over.jpg");
     game_over_texture = SDL_CreateTextureFromSurface(renderer, game_over_surface);
     SDL_Rect game_over = {0, 0, 1100, 800};
     // โหลดภาพในเกมด้านขวา
     SDL_Surface* ingame_right_surface = NULL;
     SDL_Texture* ingame_right_texture = NULL;
-    ingame_right_surface = IMG_Load("right_img.png");
+    ingame_right_surface = IMG_Load("image/right_img.png");
     ingame_right_texture = SDL_CreateTextureFromSurface(renderer, ingame_right_surface);
     SDL_Rect ingame_right = {800, 20, 280, 620};
     // โหลดอาหาร
     SDL_Surface* food_surface = NULL;
     SDL_Texture* food_texture = NULL;
-    food_surface = IMG_Load("plus.png");
+    food_surface = IMG_Load("image/plus.png");
     // โหลด music
     Mix_Music *music = NULL;
-    music = Mix_LoadMUS("bg_music.mp3");
+    music = Mix_LoadMUS("audio/bg_music.mp3");
     // โหลด sound effect ตอนงูกินอาหาร
     Mix_Chunk *eat = NULL;
-    eat = Mix_LoadWAV("eat.wav");
+    eat = Mix_LoadWAV("audio/eat.wav");
     // โหลด fonts
     TTF_Font* sans = TTF_OpenFont("OpenSans-Regular.ttf", 100);
     // ตั้งตัวแปร สี
