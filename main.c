@@ -39,6 +39,12 @@ int main(int argc, char* args[]){
     menu_title_surface = IMG_Load("image/menu_title.png");
     menu_title_texture = SDL_CreateTextureFromSurface(renderer, menu_title_surface);
     SDL_Rect menu_title = {300, 60, 520, 138};
+    // โหลดภาพ title ใน เมนูเลือกระดับความยาก
+    SDL_Surface* diff_title_surface = NULL;
+    SDL_Texture* diff_title_texture = NULL;
+    diff_title_surface = IMG_Load("image/select_diff.png");
+    diff_title_texture = SDL_CreateTextureFromSurface(renderer, diff_title_surface);
+    SDL_Rect diff_title = {225, 60, 664, 151};
     // โหลดภาพ "Press ENTER to start" ใน start menu
     SDL_Surface* press_title_surface = NULL;
     SDL_Texture* press_title_texture = NULL;
@@ -50,12 +56,6 @@ int main(int argc, char* args[]){
     SDL_Texture* menu_texture = NULL;
     menu_surface = IMG_Load("image/menu.png");
     menu_texture = SDL_CreateTextureFromSurface(renderer, menu_surface);
-    // โหลดภาพเมนู (เลือกระดับความยาก)
-    SDL_Surface* game_option_surface = NULL;
-    SDL_Texture* game_option_texture = NULL;
-    game_option_surface = IMG_Load("image/game_option.png");
-    game_option_texture = SDL_CreateTextureFromSurface(renderer, game_option_surface);
-    SDL_Rect game_option = {0, 0, 1200, 800};
     // โหลดตัวงู
     SDL_Surface* snake_surface = NULL;
     SDL_Texture* snake_texture = NULL;
@@ -94,10 +94,6 @@ int main(int argc, char* args[]){
     SDL_Surface* surfacemessage = TTF_RenderText_Solid(sans, "xxxxxx", black);
     SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfacemessage);
     SDL_Rect message_rect = {810, 665, 260, 100};
-    // กําหนดข้อความ Game option
-    SDL_Surface* gameoption_message_surface = TTF_RenderText_Solid(sans, "Game option", black);
-    SDL_Texture* gameoption_message = SDL_CreateTextureFromSurface(renderer, gameoption_message_surface);
-    SDL_Rect gameoption_message_rect = {300, 50, 500, 100};
     // กําหนดข้อความ Easy
     SDL_Surface* diff_message_surface = TTF_RenderText_Solid(sans, "Easy", black);
     SDL_Texture* diff_message = SDL_CreateTextureFromSurface(renderer, diff_message_surface);
@@ -202,8 +198,21 @@ int main(int argc, char* args[]){
         }
         else if (menu_check == 2){
             SDL_RenderClear(renderer);
-            SDL_RenderCopy(renderer, game_option_texture, NULL, &game_option);
-            SDL_RenderCopy(renderer, gameoption_message, NULL, &gameoption_message_rect);
+            SDL_Rect menu = {menu_x, 0, 1920, 800};
+            if (menu_pos == 1){
+                menu_x += 0.01;
+            }
+            if (menu_pos == 2){
+                menu_x -= 0.01;
+            }
+            if (menu_x >= 0){
+                menu_pos = 2;
+            }
+            if (menu_x <= -820){
+                menu_pos = 1;
+            }
+            SDL_RenderCopy(renderer, menu_texture, NULL, &menu);
+            SDL_RenderCopy(renderer, diff_title_texture, NULL, &diff_title);
             SDL_RenderCopy(renderer, diff_message, NULL, &diff_message_rect);
             SDL_RenderCopy(renderer, diff2_message, NULL, &diff2_message_rect);
             SDL_RenderCopy(renderer, diff3_message, NULL, &diff3_message_rect);
