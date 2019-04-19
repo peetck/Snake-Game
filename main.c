@@ -28,11 +28,11 @@ int main(int argc, char* args[]){
     bg_texture = SDL_CreateTextureFromSurface(renderer, bg_surface);
     SDL_Rect bg = {0, 0, 1200, 800};
     // โหลดภาพพื้นหลังในเกม
-    SDL_Surface* forest_surface = NULL;
-    SDL_Texture* forest_texture = NULL;
-    forest_surface = IMG_Load("image/forest.jpg");
-    forest_texture = SDL_CreateTextureFromSurface(renderer, forest_surface);
-    SDL_Rect forest = {20, 20, 760, 760};
+    SDL_Surface* ingame_bg_surface = NULL;
+    SDL_Texture* ingame_bg_texture = NULL;
+    ingame_bg_surface = IMG_Load("image/ingame_bg.png");
+    ingame_bg_texture = SDL_CreateTextureFromSurface(renderer, ingame_bg_surface);
+    SDL_Rect ingame_bg = {20, 20, 760, 760};
     // โหลดภาพ title ใน start menu
     SDL_Surface* menu_title_surface = NULL;
     SDL_Texture* menu_title_texture = NULL;
@@ -242,7 +242,7 @@ int main(int argc, char* args[]){
             SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfacemessage);
             SDL_RenderClear(renderer);
             SDL_RenderCopy(renderer, bg_texture, NULL, &bg);
-            SDL_RenderCopy(renderer, forest_texture, NULL, &forest);
+            SDL_RenderCopy(renderer, ingame_bg_texture, NULL, &ingame_bg);
             SDL_RenderCopy(renderer, ingame_right_texture, NULL, &ingame_right);
             while (food_status){
                 food_texture = SDL_CreateTextureFromSurface(renderer, food_surface);
