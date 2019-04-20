@@ -14,7 +14,7 @@ int main(int argc, char* args[]){
     SDL_Init(SDL_INIT_EVERYTHING);
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
     // สร้างหน้าต่างโปรแกรม
-    SDL_Window* window = SDL_CreateWindow("Snake Game @@", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+    SDL_Window* window = SDL_CreateWindow("Snake Game with C language", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
     // สร้าง ตัวแปร renderer
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     // สร้างตัวแปร event
@@ -150,6 +150,8 @@ int main(int argc, char* args[]){
     int menu_pos = 1; // ตัวแปรไว้เก็บว่าขณะนี้ ภาพเมนูเลื่อนจาก ขวา > ซ้าย หรือ ซ้าย > ขวา
     // เล่นเพลง (ไม่มีวันจบ)
     Mix_PlayMusic(music, -1);
+    // ตั้งรูปของหน้าต่าง window
+    SDL_SetWindowIcon(window, snake_surface);
     // โปรแกรมรัน
     while (running){
         // เช็ค event
