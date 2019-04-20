@@ -75,6 +75,30 @@ int main(int argc, char* args[]){
     select_surface = IMG_Load("image/select.png");
     select_texture = SDL_CreateTextureFromSurface(renderer, select_surface);
     SDL_Rect select = {440, 250, 43, 57};
+    // โหลดภาพ "Game over!!"
+    SDL_Surface* gameover_surface = NULL;
+    SDL_Texture* gameover_texture = NULL;
+    gameover_surface = IMG_Load("image/gameover.png");
+    gameover_texture = SDL_CreateTextureFromSurface(renderer, gameover_surface);
+    SDL_Rect gameover = {310, 60, 521, 82};
+    // โหลดภาพ "play again"
+    SDL_Surface* playagain_surface = NULL;
+    SDL_Texture* playagain_texture = NULL;
+    playagain_surface = IMG_Load("image/playagain.png");
+    playagain_texture = SDL_CreateTextureFromSurface(renderer, playagain_surface);
+    SDL_Rect playagain = {400, 300, 339, 80};
+    // โหลดภาพ "exit"
+    SDL_Surface* exit_surface = NULL;
+    SDL_Texture* exit_texture = NULL;
+    exit_surface = IMG_Load("image/exit.png");
+    exit_texture = SDL_CreateTextureFromSurface(renderer, exit_surface);
+    SDL_Rect exit = {490, 500, 134, 66};
+    // โหลด you score
+    SDL_Surface* youscore_surface = NULL;
+    SDL_Texture* youscore_texture = NULL;
+    youscore_surface = IMG_Load("image/youscore.png");
+    youscore_texture = SDL_CreateTextureFromSurface(renderer, youscore_surface);
+    SDL_Rect youscore = {300, 700, 480, 70};
     // โหลดภาพเมนู
     SDL_Surface* menu_surface = NULL;
     SDL_Texture* menu_texture = NULL;
@@ -85,12 +109,6 @@ int main(int argc, char* args[]){
     SDL_Texture* snake_texture = NULL;
     snake_surface = IMG_Load("image/snake.png");
     snake_texture = SDL_CreateTextureFromSurface(renderer, snake_surface);
-    // โหลดภาพตอนจบเกม
-    SDL_Surface* game_over_surface = NULL;
-    SDL_Texture* game_over_texture = NULL;
-    game_over_surface = IMG_Load("image/game_over.jpg");
-    game_over_texture = SDL_CreateTextureFromSurface(renderer, game_over_surface);
-    SDL_Rect game_over = {0, 0, 1100, 800};
     // โหลดภาพในเกมด้านขวา
     SDL_Surface* ingame_right_surface = NULL;
     SDL_Texture* ingame_right_texture = NULL;
@@ -124,6 +142,10 @@ int main(int argc, char* args[]){
     SDL_Surface* surfacemessage = TTF_RenderText_Solid(sans, "xxxxxx", black);
     SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfacemessage);
     SDL_Rect message_rect = {810, 665, 260, 100};
+    // กําหนดข้อความ ------
+    SDL_Surface* score_die = TTF_RenderText_Solid(sans, "------", black);
+    SDL_Texture* score_die_texture = SDL_CreateTextureFromSurface(renderer, score_die);
+    SDL_Rect score_die_rect = {530, 675, 250, 90};
     // ตั้งตัวแปรต่างๆ
     int x[1000]; // arrays ของ งู ในแกน x
     int y[1000]; // arrays ของ งู ในแกน y
@@ -193,8 +215,37 @@ int main(int argc, char* args[]){
                     menu_check++;
                     Mix_PlayChannel( -1, enter, 0 );
                 }
+                else if (menu_check == 4 && event.key.keysym.sym == SDLK_UP){
+                    select_diff--;
+                    Mix_PlayChannel( -1, selection, 0 );
+                }
+                else if (menu_check == 4 && event.key.keysym.sym == SDLK_DOWN){
+                    select_diff++;
+                    Mix_PlayChannel( -1, selection, 0 );
+                }
                 else if (menu_check == 4 && event.key.keysym.sym == SDLK_RETURN){
-                    running = 0;
+                    Mix_PlayChannel( -1, enter, 0 );
+                    if (select_diff == 1){
+                        score = 0;
+                        memset(x, 0, sizeof(x));
+                        memset(y, 0, sizeof(y));
+                        memset(temp_x, 0, sizeof(temp_x));
+                        memset(temp_y, 0, sizeof(temp_y));
+                        size = 3;
+                        x[0] = 400;
+                        y[0] = 400;
+                        x[1] = 380;
+                        y[1] = 400;
+                        x[2] = 360;
+                        y[2] = 400;
+                        going = 'R';
+                        food_status = 1;
+                        keyboard_bug_fix = 1;
+                        menu_check = 2;
+                    }
+                    else{
+                        running = 0;
+                    }
                 }
             }
         }
@@ -324,6 +375,9 @@ int main(int argc, char* args[]){
                 if (x[0] == x[i] && y[0] == y[i]){
                     menu_check = 4;
                     Mix_PlayChannel( -1, game_over_sound, 0 );
+                    score_die = TTF_RenderText_Solid(sans, score_str, black);
+                    score_die_texture = SDL_CreateTextureFromSurface(renderer, score_die);
+                    select_diff = 1;
                     break;
                 }
                 x[i] = temp_x[i - 1];
@@ -353,8 +407,43 @@ int main(int argc, char* args[]){
             keyboard_bug_fix = 1;
         }
         else if (menu_check == 4){
+            SDL_Rect test_rect = {530, 675, 250, 90};
             SDL_RenderClear(renderer);
-            SDL_RenderCopy(renderer, game_over_texture, NULL, &game_over);
+            SDL_Rect menu = {menu_x, 0, 1920, 800};
+            if (menu_pos == 1){
+                menu_x += 0.01;
+            }
+            if (menu_pos == 2){
+                menu_x -= 0.01;
+            }
+            if (menu_x >= 0){
+                menu_pos = 2;
+            }
+            if (menu_x <= -820){
+                menu_pos = 1;
+            }
+            if (select_diff > 2){
+                select_diff = 1;
+            }
+            if (select_diff < 1){
+                select_diff = 2;
+            }
+            if (select_diff == 1){
+                diff_x = 360;
+                diff_y = 305;
+            }
+            if (select_diff == 2){
+                diff_x = 450;
+                diff_y = 505;
+            }
+            SDL_RenderCopy(renderer, menu_texture, NULL, &menu);
+            SDL_RenderCopy(renderer, gameover_texture, NULL, &gameover);
+            SDL_RenderCopy(renderer, playagain_texture, NULL, &playagain);
+            SDL_RenderCopy(renderer, exit_texture, NULL, &exit);
+            SDL_RenderCopy(renderer, youscore_texture, NULL, &youscore);
+            SDL_RenderCopy(renderer, score_die_texture, NULL, &score_die_rect);
+            SDL_Rect select = {diff_x, diff_y, 43, 57};
+            SDL_RenderCopy(renderer, select_texture, NULL, &select);
             SDL_RenderPresent(renderer);
         }
     }
