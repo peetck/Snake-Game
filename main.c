@@ -107,6 +107,15 @@ int main(int argc, char* args[]){
     // โหลด sound effect ตอนงูกินอาหาร
     Mix_Chunk *eat = NULL;
     eat = Mix_LoadWAV("audio/eat.wav");
+    // โหลด sound effect ตอนเลื่อน
+    Mix_Chunk *selection = NULL;
+    selection = Mix_LoadWAV("audio/selection.wav");
+    // โหลด sound effect ตอนกด enter
+    Mix_Chunk *enter = NULL;
+    enter = Mix_LoadWAV("audio/enter.wav");
+    // โหลด sound effect game over
+    Mix_Chunk* game_over_sound = NULL;
+    game_over_sound = Mix_LoadWAV("audio/gameover.wav");
     // โหลด fonts
     TTF_Font* sans = TTF_OpenFont("OpenSans-Regular.ttf", 100);
     // ตั้งตัวแปร สี
@@ -168,15 +177,19 @@ int main(int argc, char* args[]){
                 }
                 else if (menu_check == 1 && event.key.keysym.sym == SDLK_RETURN){
                     menu_check = 2;
+                    Mix_PlayChannel( -1, enter, 0 );
                 }
                 else if (menu_check == 2 && event.key.keysym.sym == SDLK_UP){
                     select_diff --;
+                    Mix_PlayChannel( -1, selection, 0 );
                 }
                 else if (menu_check == 2 && event.key.keysym.sym == SDLK_DOWN){
                     select_diff ++;
+                    Mix_PlayChannel( -1, selection, 0 );
                 }
                 else if (menu_check == 2 && event.key.keysym.sym == SDLK_RETURN){
                     menu_check++;
+                    Mix_PlayChannel( -1, enter, 0 );
                 }
                 else if (menu_check == 4 && event.key.keysym.sym == SDLK_RETURN){
                     running = 0;
@@ -308,6 +321,7 @@ int main(int argc, char* args[]){
             for (int i = 1; i < size; i++){
                 if (x[0] == x[i] && y[0] == y[i]){
                     menu_check = 4;
+                    Mix_PlayChannel( -1, game_over_sound, 0 );
                     break;
                 }
                 x[i] = temp_x[i - 1];
