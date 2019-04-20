@@ -51,6 +51,30 @@ int main(int argc, char* args[]){
     press_title_surface = IMG_Load("image/press_title.png");
     press_title_texture = SDL_CreateTextureFromSurface(renderer, press_title_surface);
     SDL_Rect press_title = {320, 660, 443, 53};
+    // โหลดภาพคําว่า "Easy"
+    SDL_Surface* easy_surface = NULL;
+    SDL_Texture* easy_texture = NULL;
+    easy_surface = IMG_Load("image/easy.png");
+    easy_texture = SDL_CreateTextureFromSurface(renderer, easy_surface);
+    SDL_Rect easy = {480, 250, 143, 76};
+    // โหลดภาพ "Medium"
+    SDL_Surface* medium_surface = NULL;
+    SDL_Texture* medium_texture = NULL;
+    medium_surface = IMG_Load("image/medium.png");
+    medium_texture = SDL_CreateTextureFromSurface(renderer, medium_surface);
+    SDL_Rect medium = {430, 450, 269, 66};
+    // โหลดภาพ "Hard"
+    SDL_Surface* hard_surface = NULL;
+    SDL_Texture* hard_texture = NULL;
+    hard_surface = IMG_Load("image/hard.png");
+    hard_texture = SDL_CreateTextureFromSurface(renderer, hard_surface);
+    SDL_Rect hard = {480, 650, 162, 66};
+    // โหลดภาพ ">"
+    SDL_Surface* select_surface = NULL;
+    SDL_Texture* select_texture = NULL;
+    select_surface = IMG_Load("image/select.png");
+    select_texture = SDL_CreateTextureFromSurface(renderer, select_surface);
+    SDL_Rect select = {440, 250, 43, 57};
     // โหลดภาพเมนู
     SDL_Surface* menu_surface = NULL;
     SDL_Texture* menu_texture = NULL;
@@ -87,28 +111,10 @@ int main(int argc, char* args[]){
     TTF_Font* sans = TTF_OpenFont("OpenSans-Regular.ttf", 100);
     // ตั้งตัวแปร สี
     SDL_Color black = {0, 0, 0};
-    SDL_Color white = {255, 255, 255};
-    SDL_Color blue = {0, 0, 255};
-    SDL_Color blue1 = {6, 158, 255};
     // กําหนดข้อความ xxxxxx
     SDL_Surface* surfacemessage = TTF_RenderText_Solid(sans, "xxxxxx", black);
     SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfacemessage);
     SDL_Rect message_rect = {810, 665, 260, 100};
-    // กําหนดข้อความ Easy
-    SDL_Surface* diff_message_surface = TTF_RenderText_Solid(sans, "Easy", black);
-    SDL_Texture* diff_message = SDL_CreateTextureFromSurface(renderer, diff_message_surface);
-    SDL_Rect diff_message_rect = {450, 200, 150, 100};
-    // กําหนดข้อความ Medium
-    SDL_Surface* diff2_message_surface = TTF_RenderText_Solid(sans, "Medium", black);
-    SDL_Texture* diff2_message = SDL_CreateTextureFromSurface(renderer, diff2_message_surface);
-    SDL_Rect diff2_message_rect = {450, 400, 250, 100};
-    // กําหนดข้อความ Hard
-    SDL_Surface* diff3_message_surface = TTF_RenderText_Solid(sans, "Hard", black);
-    SDL_Texture* diff3_message = SDL_CreateTextureFromSurface(renderer, diff3_message_surface);
-    SDL_Rect diff3_message_rect = {450, 600, 150, 100};
-    // กําหนดข้อความ >
-    SDL_Surface* select_message_surface = TTF_RenderText_Solid(sans, ">", black);
-    SDL_Texture* select_message = SDL_CreateTextureFromSurface(renderer, select_message_surface);
     // ตั้งตัวแปรต่างๆ
     int x[1000]; // arrays ของ งู ในแกน x
     int y[1000]; // arrays ของ งู ในแกน y
@@ -129,7 +135,8 @@ int main(int argc, char* args[]){
     int score = 0; // ตัวแปรเก็บค่า score
     char score_str[10000]; // score ที่เป็น str
     int menu_check = 1; // ตัวแปรไว้บอกว่าตอนนี้อยู่หน้าเมนูอันไหน
-    int diff_t = 200; // ตัวแปรไว้เก็บค่าความเร็วในแต่ละระดับความยาก
+    int diff_y = 250; // ตัวแปรไว้เก็บตําแหน่งของรูป ">" ในหน้าเมนูเลือกระดับความยาก แกน y
+    int diff_x = 440; // ตัวแปรไว้เก็บตําแหน่งของรูป ">" ในหน้าเมนูเลือกระดับความยาก แกน x
     float menu_x = -820; // ตัวแปรไว้เก็บแกน x ของภาพเมนู
     int menu_pos = 1; // ตัวแปรไว้เก็บว่าขณะนี้ ภาพเมนูเลื่อนจาก ขวา > ซ้าย หรือ ซ้าย > ขวา
     // เล่นเพลง (ไม่มีวันจบ)
@@ -213,27 +220,29 @@ int main(int argc, char* args[]){
             }
             SDL_RenderCopy(renderer, menu_texture, NULL, &menu);
             SDL_RenderCopy(renderer, diff_title_texture, NULL, &diff_title);
-            SDL_RenderCopy(renderer, diff_message, NULL, &diff_message_rect);
-            SDL_RenderCopy(renderer, diff2_message, NULL, &diff2_message_rect);
-            SDL_RenderCopy(renderer, diff3_message, NULL, &diff3_message_rect);
+            SDL_RenderCopy(renderer, easy_texture, NULL, &easy);
+            SDL_RenderCopy(renderer, medium_texture, NULL, &medium);
+            SDL_RenderCopy(renderer, hard_texture, NULL, &hard);
             if (select_diff < 1){
                 select_diff = 3;
             }
             if (select_diff > 3){
                 select_diff = 1;
             }
-
             if (select_diff == 1){
-                diff_t = 200;
+                diff_y = 250;
+                diff_x = 440;
             }
-            else if (select_diff == 2){
-                diff_t = 400;
+            if (select_diff == 2){
+                diff_y = 450;
+                diff_x = 390;
             }
-            else if (select_diff == 3){
-                diff_t = 600;
+            if (select_diff == 3){
+                diff_y = 650;
+                diff_x = 440;
             }
-            SDL_Rect select_message_rect = {350, diff_t, 50, 100};
-            SDL_RenderCopy(renderer, select_message, NULL, &select_message_rect);
+            SDL_Rect select = {diff_x, diff_y, 43, 57};
+            SDL_RenderCopy(renderer, select_texture, NULL, &select);
             SDL_RenderPresent(renderer);
         }
         else if (menu_check == 3){
@@ -312,10 +321,10 @@ int main(int argc, char* args[]){
             SDL_RenderPresent(renderer);
             // ตั้งค่า delay time;
             int delay_diff;
-            if (diff_t == 200){
+            if (select_diff == 1){
                 delay_diff = 4000;
             }
-            else if (diff_t == 400){
+            else if (select_diff == 2){
                 delay_diff = 3000;
             }
             else{
