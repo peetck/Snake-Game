@@ -170,6 +170,7 @@ int main(int argc, char* args[]){
     int diff_x = 440; // ตัวแปรไว้เก็บตําแหน่งของรูป ">" ในหน้าเมนูเลือกระดับความยาก แกน x
     float menu_x = -820; // ตัวแปรไว้เก็บแกน x ของภาพเมนู
     int menu_pos = 1; // ตัวแปรไว้เก็บว่าขณะนี้ ภาพเมนูเลื่อนจาก ขวา > ซ้าย หรือ ซ้าย > ขวา
+    int pause = 0; // กําหนกตัวแปร pause ไว้ใช้เวลา user กดหยุดเกม
     // เล่นเพลง (ไม่มีวันจบ)
     Mix_PlayMusic(music, -1);
     // ตั้งรูปของหน้าต่าง window
@@ -247,6 +248,14 @@ int main(int argc, char* args[]){
                         running = 0;
                     }
                 }
+                else if (menu_check == 3 && event.key.keysym.sym == SDLK_p){
+                    if (pause == 1){
+                        pause = 0;
+                    }
+                    else{
+                        pause = 1;
+                    }
+                }
             }
         }
         if (menu_check == 1){
@@ -312,6 +321,9 @@ int main(int argc, char* args[]){
             SDL_RenderPresent(renderer);
         }
         else if (menu_check == 3){
+            if (pause){
+                continue;
+            }
             sprintf(score_str, "%06d", score);
             SDL_Surface* surfacemessage = TTF_RenderText_Solid(sans, score_str, black);
             SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surfacemessage);
