@@ -143,6 +143,9 @@ int main(int argc, char* args[]){
     // โหลด sound effect ตอนกด enter
     Mix_Chunk *enter = NULL;
     enter = Mix_LoadWAV("audio/enter.wav");
+    // โหลด sound effect ตอนกด pause
+    Mix_Chunk *beep = NULL;
+    beep = Mix_LoadWAV("audio/beep.ogg");
     // โหลด sound effect game over
     Mix_Chunk* game_over_sound = NULL;
     game_over_sound = Mix_LoadWAV("audio/gameover.wav");
@@ -263,9 +266,11 @@ int main(int argc, char* args[]){
                 else if (menu_check == 3 && event.key.keysym.sym == SDLK_p){
                     if (pause == 1){
                         pause = 0;
+                        Mix_PlayChannel( -1, enter, 0 );
                     }
                     else{
                         pause = 1;
+                        Mix_PlayChannel( -1, beep, 0 );
                     }
                 }
             }
