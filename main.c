@@ -115,6 +115,12 @@ int main(int argc, char* args[]){
     ingame_right_surface = IMG_Load("image/right_img.png");
     ingame_right_texture = SDL_CreateTextureFromSurface(renderer, ingame_right_surface);
     SDL_Rect ingame_right = {800, 20, 280, 620};
+    // โหลดภาพในเกมด้านขวาล่าง
+    SDL_Surface* right_bot_surface = NULL;
+    SDL_Texture* right_bot_texture = NULL;
+    right_bot_surface = IMG_Load("image/right_bot.png");
+    right_bot_texture = SDL_CreateTextureFromSurface(renderer, right_bot_surface);
+    SDL_Rect right_bot = {800, 660, 280, 120};
     // โหลดอาหาร
     SDL_Surface* food_surface = NULL;
     SDL_Texture* food_texture = NULL;
@@ -331,6 +337,7 @@ int main(int argc, char* args[]){
             SDL_RenderCopy(renderer, bg_texture, NULL, &bg);
             SDL_RenderCopy(renderer, ingame_bg_texture, NULL, &ingame_bg);
             SDL_RenderCopy(renderer, ingame_right_texture, NULL, &ingame_right);
+            SDL_RenderCopy(renderer, right_bot_texture, NULL, &right_bot);
             while (food_status){
                 food_texture = SDL_CreateTextureFromSurface(renderer, food_surface);
                 food_x = 20 * (rand() % 35);
