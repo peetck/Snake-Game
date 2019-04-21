@@ -93,6 +93,12 @@ int main(int argc, char* args[]){
     exit_surface = IMG_Load("image/exit.png");
     exit_texture = SDL_CreateTextureFromSurface(renderer, exit_surface);
     SDL_Rect exit = {490, 500, 134, 66};
+    // โหลดภาพที่จะขึ้นมาเวลา pause
+    SDL_Surface* pausepic_surface = NULL;
+    SDL_Texture* pausepic_texture = NULL;
+    pausepic_surface = IMG_Load("image/pause.png");
+    pausepic_texture = SDL_CreateTextureFromSurface(renderer, pausepic_surface);
+    SDL_Rect pausepic = {260, 320, 290, 127};
     // โหลด you score
     SDL_Surface* youscore_surface = NULL;
     SDL_Texture* youscore_texture = NULL;
@@ -190,19 +196,19 @@ int main(int argc, char* args[]){
                 running = 0;
             }
             else if (event.type == SDL_KEYDOWN){
-                if (event.key.keysym.sym == SDLK_RIGHT && going != 'L' && keyboard_bug_fix && menu_check == 3){
+                if (event.key.keysym.sym == SDLK_RIGHT && going != 'L' && keyboard_bug_fix && menu_check == 3 && !pause){
                     going = 'R';
                     keyboard_bug_fix = 0;
                 }
-                else if (event.key.keysym.sym == SDLK_LEFT && going != 'R' && keyboard_bug_fix && menu_check == 3){
+                else if (event.key.keysym.sym == SDLK_LEFT && going != 'R' && keyboard_bug_fix && menu_check == 3 && !pause){
                     going = 'L';
                     keyboard_bug_fix = 0;
                 }
-                else if (event.key.keysym.sym == SDLK_UP && going != 'D' && keyboard_bug_fix && menu_check == 3){
+                else if (event.key.keysym.sym == SDLK_UP && going != 'D' && keyboard_bug_fix && menu_check == 3 && !pause){
                     going = 'U';
                     keyboard_bug_fix = 0;
                 }
-                else if (event.key.keysym.sym == SDLK_DOWN && going != 'U' && keyboard_bug_fix && menu_check == 3){
+                else if (event.key.keysym.sym == SDLK_DOWN && going != 'U' && keyboard_bug_fix && menu_check == 3 && !pause){
                     going = 'D';
                     keyboard_bug_fix = 0;
                 }
@@ -328,6 +334,8 @@ int main(int argc, char* args[]){
         }
         else if (menu_check == 3){
             if (pause){
+                SDL_RenderCopy(renderer, pausepic_texture, NULL, &pausepic);
+                SDL_RenderPresent(renderer);
                 continue;
             }
             sprintf(score_str, "%06d", score);
