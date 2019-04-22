@@ -299,7 +299,6 @@ int main(int argc, char* args[]){
             SDL_RenderCopy(renderer, menu_texture, NULL, &menu);
             SDL_RenderCopy(renderer, press_title_texture, NULL, &press_title);
             SDL_RenderCopy(renderer, menu_title_texture, NULL, &menu_title);
-            SDL_RenderCopy(renderer, snake_title_texture, NULL, &snake_title);
             SDL_RenderPresent(renderer);
         }
         else if (menu_check == 2){
