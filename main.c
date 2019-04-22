@@ -51,6 +51,12 @@ int main(int argc, char* args[]){
     press_title_surface = IMG_Load("image/press_title.png");
     press_title_texture = SDL_CreateTextureFromSurface(renderer, press_title_surface);
     SDL_Rect press_title = {320, 660, 443, 53};
+    // โหลดภาพงูในหน้าแรก
+    SDL_Surface* snake_title_surface = NULL;
+    SDL_Texture* snake_title_texture = NULL;
+    snake_title_surface = IMG_Load("image/snake_title.png");
+    snake_title_texture = SDL_CreateTextureFromSurface(renderer, snake_title_surface);
+    SDL_Rect snake_title = {400, 250, 324, 324};
     // โหลดภาพคําว่า "Easy"
     SDL_Surface* easy_surface = NULL;
     SDL_Texture* easy_texture = NULL;
@@ -189,7 +195,7 @@ int main(int argc, char* args[]){
     // เล่นเพลง (ไม่มีวันจบ)
     Mix_PlayMusic(music, -1);
     // ตั้งรูปของหน้าต่าง window
-    SDL_SetWindowIcon(window, snake_surface);
+    SDL_SetWindowIcon(window, snake_title_surface);
     // โปรแกรมรัน
     while (running){
         // เช็ค event
@@ -293,6 +299,7 @@ int main(int argc, char* args[]){
             SDL_RenderCopy(renderer, menu_texture, NULL, &menu);
             SDL_RenderCopy(renderer, press_title_texture, NULL, &press_title);
             SDL_RenderCopy(renderer, menu_title_texture, NULL, &menu_title);
+            SDL_RenderCopy(renderer, snake_title_texture, NULL, &snake_title);
             SDL_RenderPresent(renderer);
         }
         else if (menu_check == 2){
