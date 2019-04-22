@@ -7,6 +7,10 @@
 * สามารถทะลุกรอบ/กําแพงได้
 # Built With :computer:
 * C language Using SDL library
+# Special thanks :heart:
+* http://pixelartmaker.com/
+* https://opengameart.org/
+* https://textcraft.net/
 ## Group Members :family:
 
  |<img src="https://avatars1.githubusercontent.com/u/42176460?s=460&v=4" width="120px" height="120px">|<img src="https://avatars0.githubusercontent.com/u/41448294?s=460&v=4" width="120px" height="120px">|<img src="https://avatars1.githubusercontent.com/u/43022322?s=460&v=4" width="120px" height="120px">|<img src="https://avatars2.githubusercontent.com/u/42561981?s=460&v=4" width="120px" height="120px">|
