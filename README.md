@@ -12,16 +12,17 @@
 # Built With :computer:
 * โปรแกรมนี้ ใช้ภาษา C และ Library SDL ในการเขียน
 
-# Special thanks :heart:
-* http://pixelartmaker.com/
-* https://opengameart.org/
-* https://textcraft.net/
-
 # Screen Shot :camera:
 <p align="left"> <img src="image/s1.jpg" width="400"/></p>
 <p align="left"> <img src="image/s2.jpg" width="400"/></p>
 <p align="left"> <img src="image/s3.jpg" width="400"/></p>
 <p align="left"> <img src="image/s4.jpg" width="400"/></p>
+
+# Special thanks :heart:
+* http://pixelartmaker.com/
+* https://opengameart.org/
+* https://textcraft.net/
+* https://lazyfoo.net/tutorials/SDL/
 
 ## Group Members :family:
 
