@@ -6,8 +6,16 @@
 # Introduction :video_game:
 * เกมนี้เป็นส่วนหนึ่งของวิชา Computer Programming KMITL
 
-# How to play :game_die:
+# How to install :hammer:
+* โหลด Zip file จาก Github
+* ทำการแตกไฟล์
+* ดับเบิ้ลคลิกที่ Snake Game.exe เพื่อเริ่มเกม
+* ในโฟลเดอร์จะมีไฟล์ dll ที่จําเป็นให้แล้ว
+<p align="center">
+  <img width="400" src="image/install.png">
+</p>
 
+# How to play :game_die:
 * กดปุ่มลูกศรบนคีย์บอร์ดเพื่อควบคุมทิศทางของงู
 * สามารถกดปุ่ม "P" เพื่อ pause ได้
 * หากกินแมลงเต่าทองได้ขนาดของงูจะเพิ่มขึ้นและได้รับคะแนน
