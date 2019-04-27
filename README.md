@@ -6,6 +6,8 @@
 # Introduction :video_game:
 * "เกมงู" เกมที่ใครๆก็ต้องเคยเล่นหรือผ่านตามาในวัยเด็ก ในตอนนั้นเราได้แค่เล่นเพียงอย่างเดียวแต่ในตอนนี้ พวกเราสามารถเขียนเกมขึ้นมาได้ พวกเราจึงอยากคืนชีพให้เกมงูสุดคลาสสิคให้ดีกว่าเดิม(หรือแย่ลง?) แต่ยังคงความคลาสสิคอยู่
 * เกมนี้เป็นส่วนหนึ่งของวิชา Computer Programming KMITL
+# Youtube video :movie_camera:
+[![Snake Game](http://img.youtube.com/vi/qByicNhxge0/0.jpg)](http://www.youtube.com/watch?v=qByicNhxge0 "")
 
 # Download :hammer:
 * โหลด Zip file จาก [ที่นี้](https://github.com/peetck/Snake-Game/archive/master.zip)
