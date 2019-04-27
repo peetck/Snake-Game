@@ -6,7 +6,7 @@
 # Introduction :video_game:
 * เกมนี้เป็นส่วนหนึ่งของวิชา Computer Programming KMITL
 
-# How to install :hammer:
+# Download :hammer:
 * โหลด Zip file จาก [ที่นี้](https://github.com/peetck/Snake-Game/archive/master.zip)
 * ทำการแตกไฟล์
 * ดับเบิ้ลคลิกที่ Snake Game.exe เพื่อเริ่มเกม
