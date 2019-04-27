@@ -1,24 +1,29 @@
 <p align="center"> <img src="image/menu_title.png" width="500"/></p>
+<p align="center">
+  <img width="460" src="image/poster.jpg">
+</p>
 
 # Introduction :video_game:
 * เกมนี้เป็นส่วนหนึ่งของวิชา Computer Programming KMITL
 
 # How to play :game_die:
+<img align="right" width="200" src="image/right_img.png">
+
 * กดปุ่มลูกศรบนคีย์บอร์ดเพื่อควบคุมทิศทางของงู
 * สามารถกดปุ่ม "P" เพื่อ pause ได้
 * หากกินแมลงเต่าทองได้ขนาดของงูจะเพิ่มขึ้นและได้รับคะแนน
 * หากชนตัวเองงูจะตาย
 * สามารถทะลุกรอบ/กําแพงได้
-<p align="left"> <img src="image/right_img.png" width="300"/></p>
+
 
 # Built With :computer:
 * โปรแกรมนี้ ใช้ภาษา C และ Library SDL ในการเขียน
 
-# Screen Shot :camera:
-<p align="left"> <img src="image/s1.jpg" width="400"/></p>
-<p align="left"> <img src="image/s2.jpg" width="400"/></p>
-<p align="left"> <img src="image/s3.jpg" width="400"/></p>
-<p align="left"> <img src="image/s4.jpg" width="400"/></p>
+# Ingame :camera:
+<p align="left"> <img src="image/menu_gif.gif" width="400"/></p>
+<p align="left"> <img src="image/menu_gif2.gif" width="400"/></p>
+<p align="left"> <img src="image/menu_gif3.gif" width="400"/></p>
+<p align="left"> <img src="image/menu_gif4.gif" width="400"/></p>
 
 # Special thanks :heart:
 * http://pixelartmaker.com/
