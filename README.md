@@ -12,7 +12,7 @@
 * ดับเบิ้ลคลิกที่ Snake Game.exe เพื่อเริ่มเกม
 * ในโฟลเดอร์จะมีไฟล์ dll ที่จําเป็นให้แล้ว
 <p align="center">
-  <img width="400" src="image/install.png">
+  <img width="400" src="image/install_gif.gif">
 </p>
 
 # How to play :game_die:
