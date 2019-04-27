@@ -7,7 +7,6 @@
 * เกมนี้เป็นส่วนหนึ่งของวิชา Computer Programming KMITL
 
 # How to play :game_die:
-<img align="right" width="200" src="image/right_img.png">
 
 * กดปุ่มลูกศรบนคีย์บอร์ดเพื่อควบคุมทิศทางของงู
 * สามารถกดปุ่ม "P" เพื่อ pause ได้
