@@ -1,54 +1,57 @@
-<p align="center"> <img src="image/menu_title.png" width="500"/></p>
 <p align="center">
-  <img width="400" src="image/poster.jpg">
+  <a href="https://github.com/peetck/Snake-Game">
+    <img src="https://github.com/peetck/Snake-Game/raw/master/image/menu_title.png" alt="Logo">
+  </a>
 </p>
 
-# Introduction :video_game:
-* "เกมงู" เกมที่ใครๆก็ต้องเคยเล่นหรือผ่านตามาในวัยเด็ก ในตอนนั้นเราได้แค่เล่นเพียงอย่างเดียวแต่ในตอนนี้ พวกเราสามารถเขียนเกมขึ้นมาได้ พวกเราจึงอยากคืนชีพให้เกมงูสุดคลาสสิคให้ดีกว่าเดิม(หรือแย่ลง?) แต่ยังคงความคลาสสิคอยู่
-* เกมนี้เป็นส่วนหนึ่งของวิชา Computer Programming KMITL
+## About The Project :scroll:
 
-# Video Presentation :video_camera:
-  <a href="https://www.youtube.com/watch?v=qByicNhxge0"><img src="https://img.youtube.com/vi/qByicNhxge0/0.jpg" alt="Snake Game"></a>
+* "Snake game" is a game that everyone used to play before through during their childhood. We want to revive the classic snake game better (or worse?) but still have the classic feeling.
+* This game is part of Subject "Computer Programming" KMITL.
 
-
-# Download :hammer:
-* โหลด Zip file จาก [ที่นี้](https://github.com/peetck/Snake-Game/archive/master.zip)
-* ทำการแตกไฟล์
-* ดับเบิ้ลคลิกที่ Snake Game.exe เพื่อเริ่มเกม
-* ในโฟลเดอร์จะมีไฟล์ dll ที่จําเป็นให้แล้ว
-<p align="center">
-  <img width="400" src="image/install_gif.gif">
-</p>
-
-# How to play :game_die:
-* กดปุ่มลูกศรบนคีย์บอร์ดเพื่อควบคุมทิศทางของงู
-* สามารถกดปุ่ม "P" เพื่อ pause ได้
-* หากกินแมลงเต่าทองได้ขนาดของงูจะเพิ่มขึ้นและได้รับคะแนน
-* หากชนตัวเองงูจะตาย
-* สามารถทะลุกรอบ/กําแพงได้
-
-
-# Built With :computer:
-* โปรแกรมนี้ ใช้ภาษา C และ Library SDL ในการเขียน
-
-# Ingame :camera:
-<p> <img width="400" src="image/menu_gif.gif"> <img width="400" src="image/menu_gif2.gif"> </p>
-<p> <img width="400" src="image/menu_gif3.gif"> <img width="400" src="image/menu_gif4.gif"> </p>
-
-# Special Thanks :heart:
+## Special Thanks ❤️
 * http://pixelartmaker.com/
 * https://textcraft.net/
 * https://opengameart.org/
 * https://lazyfoo.net/tutorials/SDL/
 
-# Group Members :family:
- |<img src="https://avatars1.githubusercontent.com/u/42176460?s=460&v=4" width="120px" height="120px">|<img src="https://avatars0.githubusercontent.com/u/41448294?s=460&v=4" width="120px" height="120px">|<img src="https://avatars1.githubusercontent.com/u/43022322?s=460&v=4" width="120px" height="120px">|<img src="https://avatars2.githubusercontent.com/u/42561981?s=460&v=4" width="120px" height="120px">|
- |:---:|:---:|:---:|:---:|
-|[peetck](https://github.com/peetck)|[thangmo29](https://github.com/thangmo29)|[skaferun9](https://github.com/skaferun9)|[blackjokerr](https://github.com/blackjokerrr)|
+## Video Presentation (Thai Language) :video_camera:
+<a href="https://www.youtube.com/watch?v=qByicNhxge0"><img src="https://img.youtube.com/vi/qByicNhxge0/0.jpg" alt="Snake Game"></a>
+
+## Built With :computer:
+* C Language.
+* Library SDL.
+
+## Download 🔨
+* Download zip file from [here](https://github.com/peetck/Snake-Game/archive/master.zip).
+* Extract the file.
+* Run "Snake Game.exe" to start
+
+<p align="center">
+  <img width="400" src="image/install_gif.gif">
+</p>
+
+## Ingame 📷
+<p> <img width="400" src="image/menu_gif.gif"> <img width="400" src="image/menu_gif2.gif"> </p>
+<p> <img width="400" src="image/menu_gif3.gif"> <img width="400" src="image/menu_gif4.gif"> </p>
+
+# How to play :game_die:
+* Press the arrow keys on the keyboard to control the direction of the snake.
+* Can press "P" button to pause.
+* If you can eat the ladybug, the snake's size will increase and get points.
+* If the snake hit itself, the snake will die.
+* Able to break through the wall.
+
+## Group Members :family:
+|![](https://avatars1.githubusercontent.com/u/42176460?s=150&v=4)|![](https://avatars0.githubusercontent.com/u/41448294?s=150&v=4)|![](https://avatars1.githubusercontent.com/u/43022322?s=150&v=4)|![](https://avatars2.githubusercontent.com/u/42561981?s=150&v=4)
+|:-:|:-:|:-:|:-:|
+|61070218|61070199|61070211|61070221|
+|Sarun|Worapat|Visarut|Sirawit|
+|Yantabutr|Phatarametravorakul|Phanmaisri|Yodjit|
+|[@peetck](https://github.com/peetck)|[@thangmo29](https://github.com/thangmo29)|[@skaferun9](https://github.com/skaferun9)|[@blackjokerrr](https://github.com/blackjokerrr)|
 
 # Assistant Teacher :pray:
  |<img src="image/aj.ong.png" width="120px" height="120px">|<img src="image/aj.panwit.jpg" width="120px" height="120px">|
  |:---:|:---:|
  |ผศ. ดร. กิติ์สุชาต พสุภา|ผศ. ดร. ปานวิทย์ ธุวะนุติ|
-
 
